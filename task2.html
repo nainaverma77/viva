@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Character Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 120px;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    .counter {
+      margin-top: 8px;
+      font-weight: bold;
+      
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Live Character Counter</h2>
+
+    <label for="message">Type your message:</label>
+    <textarea id="message" placeholder="Start typing..."></textarea>
+
+    <div id="charCounter" class="counter">
+      Characters left: 100
+    </div>
+  </div>
+
+  <script>
+    const textarea = document.getElementById('message');
+    const counter = document.getElementById('charCounter');
+
+    const MAX_CHARS = 100;
+
+  
+    counter.textContent = `Characters left: ${MAX_CHARS}`;
+
+    textarea.addEventListener('input', function () {
+      let text = textarea.value;
+
+      
+      if (text.length > MAX_CHARS) {
+        text = text.slice(0, MAX_CHARS);
+        textarea.value = text; 
+      }
+
+      const remaining = MAX_CHARS - text.length;
+      counter.textContent = `Characters left: ${remaining}`;
+
+      
+      if (remaining > 50) {
+        counter.style.color = 'green';
+      } else if (remaining > 20) {
+        counter.style.color = 'orange';
+      } else {
+        counter.style.color = 'red';
+      }
+    });
+  </script>
+</body>
+</html>
